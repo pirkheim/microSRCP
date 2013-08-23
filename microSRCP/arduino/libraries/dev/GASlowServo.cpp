@@ -27,7 +27,7 @@
 
 namespace dev
 {
-GASlowServo::GASlowServo( int addr, uint8_t pin, uint8_t min, uint8_t max, uint8_t step, int delay )
+GASlowServo::GASlowServo( int addr, uint8_t pin, uint8_t min, uint8_t max, uint8_t step, int delay , bool invert)
 {
 	servo = (Servo*) 0;
 
@@ -40,17 +40,25 @@ GASlowServo::GASlowServo( int addr, uint8_t pin, uint8_t min, uint8_t max, uint8
 
 	servo = new Servo();
 
-	// Trick - setzt den Servo auf die min Position
-	pos = min;
-	current = min + step;
+	this->invert = invert;
+	if (invert) //->set to max position
+	{
+		pos = max;
+		current = max - step;
+	}
+	else // Trick - setzt den Servo auf die min Position
+	{
+		pos = min;
+		current = min + step;
+	}
 	last = millis() + delay;
 	servo->attach( pin );
-	servo->write( min );
+	servo->write( pos );
 }
 
 int GASlowServo::set( int addr, int port, int value, int delay )
 {
-	if	( value == 0 )
+	if	( (value == 0 && invert == false) || (value == 1 && invert == true) )
 	{
 		pos = min;
 		last = millis();

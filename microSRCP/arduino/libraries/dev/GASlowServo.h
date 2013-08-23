@@ -43,8 +43,9 @@ private:
 	uint8_t step;	// Einheiten um wieviel jeweils weitergeschaltet werden soll
 	int delay;		// Pausen zwischen der Weiterschaltung
 	unsigned long last;
+	bool invert; //invert the direction
 public:
-	GASlowServo( int addr, uint8_t pin, uint8_t min, uint8_t max, uint8_t step = 1, int delay = 50 );
+	GASlowServo( int addr, uint8_t pin, uint8_t min, uint8_t max, uint8_t step = 1, int delay = 50 , bool invert = false);
 	int get( int addr, int port ) { return ( 200 ); }
 	int set( int addr, int port, int value, int delay );
 	void refresh();
