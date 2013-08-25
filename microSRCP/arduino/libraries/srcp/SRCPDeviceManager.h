@@ -37,22 +37,25 @@ private:
 	SRCPGenericAccessoire *firstGA;
 	SRCPGenericLoco *firstGL;
 	SRCPFeedback *firstFB;
+	SRCPGenericSM *firstSM;
 public:
 	SRCPDeviceManager();
 	void addAccessoire( SRCPGenericAccessoire* device ) { device->setNextElement(this->firstGA); this->firstGA = device; }
 	void addLoco( SRCPGenericLoco* device ) { device->setNextElement(this->firstGL); this->firstGL = device; }
 	void addFeedback( SRCPFeedback* device ) { device->setNextElement(this->firstFB); this->firstFB = device; }
+	void addSM( SRCPGenericSM* device ) { device->setNextElement(this->firstSM); this->firstSM = device; }
 	// unschoen, braucht es aber fuer SRCPSession
 	SRCPFeedback* firstFeedbackElement() { return ( firstFB ); }
 
 	int setGA( int addr, int port, int value, int delay );
 	int setGL( int addr, int drivemode, int v, int v_max, int fn[] );
 
+	int setSM( int bus, int addr, int device, int cv, int value );
+	int getSM( int bus, int addr, int device, int cv );
+
 	void refresh();
 	int getFB( int addr );
 	void setPower( int on );
-	int setSM( int bus, int addr, int device, int cv, int value ) { return( 200 ); };
-	int getSM( int bus, int addr, int device, int cv ) { return( 200 ); };
 	int getDescription( int bus, int addr, int device, int rc[] );
 
 };
