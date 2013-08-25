@@ -26,6 +26,7 @@
 #include "SRCPCommand.h"
 #include "SRCPGenericAccessoire.h"
 #include "SRCPGenericLoco.h"
+#include "SRCPGenericSM.h"
 #include "SRCPFeedback.h"
 
 namespace srcp

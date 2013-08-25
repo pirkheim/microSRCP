@@ -82,7 +82,7 @@ char* SRCPSession::dispatch( command_t& cmd )
 					return (Messages.ok());
 
 				case SM:
-					DeviceManager.setSM( cmd.bus, cmd.addr, cmd.values[0], cmd.values[1], cmd.values[2] );
+					cmd.values[0] = DeviceManager.setSM( cmd.bus, cmd.addr, cmd.values[0], cmd.values[1], cmd.values[2] );
 					return (Messages.ok());
 
 				default:

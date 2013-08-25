@@ -141,12 +141,19 @@ void setup()
 	DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(1), A0, A2 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
 	DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(9), 11, 12 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
 
-        DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(1), lego, 0, 0, 1000, 1500 ) ); //lego pir RED, channel 1 -> yellow cargo train
-	DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(2), lego, 1, 0, 800, 800 ) ); //lego pir BLUE, channel 1 -> red passenger train
-        DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(3), lego, 0, 1, 1200, 2000 ) ); //lego pir RED, channel 2 -> red cargo train
-	DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(4), lego, 1, 1 ) ); //lego pir BLUE, channel 2 -> ?
-        //DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(5), &lego, 0, 2 ) ); //lego pir RED, channel 3 -> ?
-	//DeviceManager.addLoco( new dev::GLLegoPIR( ADDR(6), &lego, 1, 2 ) ); //lego pir BLUE, channel 3 -> ?
+        dev::GLLegoPIR* lpir;
+        
+        lpir = new dev::GLLegoPIR( ADDR(1), lego, 0, 0, 1000, 1500 );
+        DeviceManager.addLoco( lpir ); //lego pir RED, channel 1 -> yellow cargo train
+        DeviceManager.addSM( lpir );
+        
+        lpir = new dev::GLLegoPIR( ADDR(2), lego, 1, 0, 800, 800 ); //lego pir BLUE, channel 1 -> red passenger train
+        DeviceManager.addLoco( lpir );
+        DeviceManager.addSM( lpir );
+        
+        lpir = new dev::GLLegoPIR( ADDR(3), lego, 0, 1, 1200, 2000 ); //lego pir RED, channel 2 -> red cargo train
+        DeviceManager.addLoco( lpir );
+        DeviceManager.addSM( lpir );
 
         DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(1), 3, 50, 90, 1, 10, true) );//track switch 1
 	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(2), 4, 50, 90, 1, 10, true ) );//track switch 2
