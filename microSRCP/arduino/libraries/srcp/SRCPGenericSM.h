@@ -29,7 +29,7 @@
 
 namespace srcp
 {
-class SRCPGenericAccessoire: public srcp::SRCPDevice
+class SRCPGenericSM: public srcp::SRCPDevice
 {
 private:
 	SRCPGenericSM* next;

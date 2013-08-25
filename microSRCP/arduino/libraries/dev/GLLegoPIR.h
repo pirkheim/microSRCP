@@ -22,19 +22,20 @@
 #define GLLEGOPIR_H_
 
 #include "../srcp/SRCPGenericLoco.h"
+#include "../srcp/SRCPGenericSM.h"
 //#include <LEGOPowerFunctions.h>
 
 
 #define PIR_SECURE_STOP //define if you would like a secure stop signal -> simply send three times
 #define PIR_DOUBLE_SEND //define this to send all commands twice
-#define PIR_SEND_FIRST_STEP_IMMEDIATE //when an acceleration or deceleration value is specified the first step is sent immediately
+#undef PIR_SEND_FIRST_STEP_IMMEDIATE //when an acceleration or deceleration value is specified the first step is sent immediately
 
 class LEGOPowerFunctions;
 
 namespace dev
 {
 
-	class GLLegoPIR : public srcp::SRCPGenericLoco
+	class GLLegoPIR : public srcp::SRCPGenericLoco, public srcp::SRCPGenericSM
 	{
 	private:
 		uint8_t m_output; //red or blue
@@ -65,6 +66,12 @@ namespace dev
 		int set( int addr, int drivemode, int v, int v_max, int fn[] );
 		void refresh();
 		void setPower( int on );
+		
+		//SM:
+		
+		int get( int bus, int addr, int device, int cv ) { return ( 423 ); }
+		int set( int bus, int addr, int device, int cv, int value );
+
 	};
 
 }

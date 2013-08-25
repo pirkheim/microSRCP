@@ -27,7 +27,9 @@ namespace dev
 
 GLLegoPIR::GLLegoPIR( int addr, LEGOPowerFunctions& pir, uint8_t pir_output, uint8_t pir_channel, unsigned int acc, unsigned int dec)
 {
-	this->addr = addr;
+	//this->addr = addr;
+	SRCPGenericLoco::addr = addr;
+	SRCPGenericSM::addr = addr;
 	
 	if (pir_output != 0 && pir_output != 1) //value out of bounds
 		m_output = 0;
@@ -162,6 +164,29 @@ void GLLegoPIR::refresh()
 void GLLegoPIR::setPower( int on )
 {
 
+}
+
+int GLLegoPIR::set( int bus, int addr, int device, int cv, int value )
+{
+	//set CV3 = acceleration delay in 10ms*value
+	if (cv == 3)
+	{
+		//check value range: 0..10sec
+		if (value < 0 || value > 1000)
+			return 423;
+		m_acc = value*10;
+		return (200);
+	}
+	else if (cv == 4)//set CV4 = deceleration delay in 10ms*value
+	{
+		//check value range: 0..10sec
+		if (value < 0 || value > 1000)
+			return 423;
+		m_dec = value*10;
+		return (200);
+	}
+	
+	return (423);
 }
 
 void GLLegoPIR::SendSpeed(int8_t speed)
