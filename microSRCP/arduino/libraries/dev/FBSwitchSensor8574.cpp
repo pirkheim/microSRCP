@@ -31,7 +31,7 @@
 namespace dev
 {
 
-FBSwitchSensor::FBSwitchSensor( int addr, uint8_t i2c_addr )
+FBSwitchSensor8574::FBSwitchSensor8574( int addr, int i2c_addr )
 {
 	this->addr = addr;
 	this->i2c_addr = i2c_addr;
@@ -42,18 +42,18 @@ FBSwitchSensor::FBSwitchSensor( int addr, uint8_t i2c_addr )
 	sensor = 0;
 }
 
-void FBSwitchSensor::refresh( )
+void FBSwitchSensor8574::refresh( )
 {
 	// alle Werte abfragen, nur der Wechsel auf LOW fuehrt zu Aenderung des Sensorstatuses
 	//read 8bit from i2c device
 	Wire.requestFrom(this->i2c_addr, 1);
 	if (Wire.available())
 	{
-		sensor = Wire.receive();
+		sensor = Wire.read();
 	}
 }
 
-int FBSwitchSensor::info( int addr, srcp::feedback fb[] )
+int FBSwitchSensor8574::info( int addr, srcp::feedback fb[] )
 {
 	refresh();
 

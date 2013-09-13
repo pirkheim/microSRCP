@@ -36,13 +36,13 @@
 namespace dev
 {
 
-class FBSwitchSensor : public srcp::SRCPFeedback
+class FBSwitchSensor8574 : public srcp::SRCPFeedback
 {
 private:
-	uint8_t i2c_addr;
+	int i2c_addr;
 public:
 	//specify the 7bit i2c address of the PCF8574 port expander 
-	FBSwitchSensor( int addr, int i2c_addr );
+	FBSwitchSensor8574( int addr, int i2c_addr );
 	void refresh();
 	int info( int addr, srcp::feedback fb[] );
 };
