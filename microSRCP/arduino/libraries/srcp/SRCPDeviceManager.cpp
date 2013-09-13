@@ -33,7 +33,6 @@ SRCPDeviceManager::SRCPDeviceManager()
 	firstGA = (srcp::SRCPGenericAccessoire*) 0;
 	firstGL = (srcp::SRCPGenericLoco*) 0;
 	firstFB = (srcp::SRCPFeedback*) 0;
-	firstSM = (srcp::SRCPGenericSM*) 0;	
 }
 
 int SRCPDeviceManager::setGA( int addr, int port, int value, int delay )
@@ -62,32 +61,6 @@ int SRCPDeviceManager::setGL( int addr, int drivemode, int v, int v_max, int fn[
 		rc = next->set( addr, drivemode, v, v_max, fn );
 	}
 	return	( rc );
-}
-
-int SRCPDeviceManager::setSM( int bus, int addr, int device, int cv, int value )
-{
-	SRCPGenericSM* next = (srcp::SRCPGenericSM*) 0;
-	int rc = 200;
-
-	for	( next = firstSM; next != (srcp::SRCPGenericSM*) 0; next = next->nextElement() )
-	{
-		if	( next->checkAddr( addr ) == 0 )
-			continue;
-		rc = next->set( bus, addr, device, cv, value );
-	}
-	return	( rc );
-}
-
-int SRCPDeviceManager::getSM( int bus, int addr, int device, int cv )
-{
-	SRCPGenericSM* sm = (srcp::SRCPGenericSM*) 0;
-	for	( sm = firstSM; sm != (srcp::SRCPGenericSM*) 0; sm = sm->nextElement() )
-	{
-		if	( sm->checkAddr( addr ) == 0 )
-			continue;
-		return	( sm->get( bus, addr, device, cv ) );
-	}
-	return	( 0 );
 }
 
 void SRCPDeviceManager::setPower( int on )
