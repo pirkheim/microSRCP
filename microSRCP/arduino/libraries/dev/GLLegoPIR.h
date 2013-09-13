@@ -26,8 +26,8 @@
 //#include <LEGOPowerFunctions.h>
 
 
-#define PIR_SECURE_STOP //define if you would like a secure stop signal -> simply send three times
-#define PIR_DOUBLE_SEND //define this to send all commands twice
+#define PIR_SECURE_STOP //define if you would like a secure stop signal -> simply send two times
+#undef PIR_DOUBLE_SEND //define this to send all commands twice
 #undef PIR_SEND_FIRST_STEP_IMMEDIATE //when an acceleration or deceleration value is specified the first step is sent immediately
 
 class LEGOPowerFunctions;

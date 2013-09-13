@@ -217,7 +217,7 @@ void GLLegoPIR::SendBreak()
 #endif
 #ifdef PIR_SECURE_STOP
 	m_pir->SingleOutput(PWM, PWM_BRK, m_output, m_channel);
-	m_pir->SingleOutput(PWM, PWM_BRK, m_output, m_channel);
+	//m_pir->SingleOutput(PWM, PWM_BRK, m_output, m_channel);
 #endif
 }
 
