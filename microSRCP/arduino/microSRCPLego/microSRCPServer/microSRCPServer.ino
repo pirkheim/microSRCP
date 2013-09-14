@@ -51,7 +51,7 @@
 // Konfiguration I2C
 #define I2C_ADDR		0	// Eigene I2C Adresse - muss pro I2C Board angepasst werden! - Master = 0
 #define I2C_OFFSET		16	// Offset, d.h. wieviele Adressen pro Board reserviert werden
-#define I2C_ENABLED		1
+#define I2C_ENABLED		0
 #define I2C_MAX_SLAVES	10	// Maximale Anzahl I2C Slave Boards am Master
 #define ADDR(x)			((I2C_ADDR * I2C_OFFSET) + x)	// Berechnung effektive Adresse
 
@@ -139,10 +139,11 @@ void setup()
 #if	( BOARD == BOARD_LEGO )
 	// Geraete initialisieren, je nach Board und Verwendung
 	
-	DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(1), A0, A2 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
-	DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(9), 11, 12 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
+	//DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(1), A0, A2 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
+	//DeviceManager.addFeedback( new dev::FBSwitchSensor( ADDR(9), 11, 12 ) ); 	// Sensoren, jeweils in Gruppen von 8 (auch wenn nicht 8 Pins belegt). A4+A5 = I2C Bus
 
-	DeviceManager.addFeedback( new dev::FBSwitchSensor8574( ADDR(17), 0x39 ) );
+	DeviceManager.addFeedback( new dev::FBSwitchSensor8574( ADDR(1), 0x38 ) );
+        DeviceManager.addFeedback( new dev::FBSwitchSensor8574( ADDR(9), 0x39 ) );
 
         DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(1), lego, 0, 0));//lego pir RED, channel 1 -> yellow cargo train        
         DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(2), lego, 1, 0));//lego pir BLUE, channel 1 -> red passenger train

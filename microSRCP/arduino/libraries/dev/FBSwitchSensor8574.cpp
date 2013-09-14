@@ -44,13 +44,22 @@ FBSwitchSensor8574::FBSwitchSensor8574( int addr, int i2c_addr )
 
 void FBSwitchSensor8574::refresh( )
 {
-	// alle Werte abfragen, nur der Wechsel auf LOW fuehrt zu Aenderung des Sensorstatuses
+	uint8_t data;
+	
 	//read 8bit from i2c device
 	Wire.requestFrom(this->i2c_addr, 1);
 	if (Wire.available())
 	{
-		sensor = Wire.read();
+		data = Wire.read();
 	}
+	
+	// alle Werte abfragen, nur der Wechsel auf LOW fuehrt zu Aenderung des Sensorstatuses
+	for	( int i = 0; i <= 8; i++ )
+	{
+		if	(bitRead(data, i) == 0)
+			bitSet( sensor, i );
+	}
+
 }
 
 int FBSwitchSensor8574::info( int addr, srcp::feedback fb[] )
