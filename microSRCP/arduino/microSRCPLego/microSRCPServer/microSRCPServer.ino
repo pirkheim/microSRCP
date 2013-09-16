@@ -149,10 +149,14 @@ void setup()
         DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(2), lego, 1, 0));//lego pir BLUE, channel 1 -> red passenger train
         DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(3), lego, 0, 1));//lego pir RED, channel 2 -> red cargo train
 
-        DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(1), 3, 50, 90, 1, 10, true) );//track switch 1
-	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(2), 4, 50, 90, 1, 10, true ) );//track switch 2
+        DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(1), 3, 50, 90, 1, 10) );//track switch 1
+	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(2), 4, 50, 90, 1, 10) );//track switch 2
         DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(3), 5, 50, 90, 1, 10 ) );//track switch 3
 	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(4), 6, 50, 90, 1, 10 ) );//track switch 4
+        DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(5), 7, 50, 90, 1, 10 ) );//track switch 5
+	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(6), 8, 50, 90, 1, 10 ) );//track switch 6
+        DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(7), 9, 50, 90, 1, 10 ) );//track switch 7
+	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(8), 10, 50, 90, 1, 10 ) );//track switch 8
 
 //--custom lego
 #elif	( BOARD == BOARD_STANDARD )

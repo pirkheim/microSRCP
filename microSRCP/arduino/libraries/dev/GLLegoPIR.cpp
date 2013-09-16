@@ -79,7 +79,8 @@ int GLLegoPIR::set( int addr, int drivemode, int v, int v_max, int fn[] )
 
 void GLLegoPIR::setPower( int on )
 {
-
+	if (on == 0)
+		SendBreak();
 }
 
 void GLLegoPIR::SendSpeed(int8_t speed)
