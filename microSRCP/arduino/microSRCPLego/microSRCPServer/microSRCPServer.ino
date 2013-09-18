@@ -155,7 +155,11 @@ void setup()
         DeviceManager.addLoco( lpir );
         DeviceManager.addSM( lpir );
         
-        lpir = new dev::GLLegoPIR( ADDR(3), lego, 0, 1, 900); //lego pir RED, channel 2 -> red cargo train
+        lpir = new dev::GLLegoPIR( ADDR(3), lego, 0, 2, 900); //lego pir RED, channel 2 -> red cargo train
+        DeviceManager.addLoco( lpir );
+        DeviceManager.addSM( lpir );
+
+        lpir = new dev::GLLegoPIR( ADDR(4), lego, 0, 3, 900); //lego pir RED, channel 2 -> red cargo train
         DeviceManager.addLoco( lpir );
         DeviceManager.addSM( lpir );
 

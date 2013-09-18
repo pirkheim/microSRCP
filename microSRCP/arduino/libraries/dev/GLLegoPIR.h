@@ -47,6 +47,7 @@ namespace dev
 		
 		unsigned int m_acc; //the acceleration delay in ms between speed steps
 		unsigned int m_dec; //the deceleration delay in ms between speed steps
+		
 		bool m_only_use_acc; //only use acc value (cv3 register)
 		
 		unsigned long m_last_time; //time of the last refresh

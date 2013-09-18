@@ -208,7 +208,7 @@ void GLLegoPIR::SendSpeed(int8_t speed)
 		speed = -7;
 	
 	if (speed < 0) //calculate reverse value
-		speed = 16 - speed;
+		speed = 16 + speed; //speed is negative so 16 - (absolute speed value)
 
 	//send now
 	m_pir->SingleOutput(PWM, speed, m_output, m_channel);
