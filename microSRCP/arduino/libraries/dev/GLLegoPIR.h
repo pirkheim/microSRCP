@@ -22,6 +22,7 @@
 #define GLLEGOPIR_H_
 
 #include "../srcp/SRCPGenericLoco.h"
+#include "../srcp/SRCPGenericSM.h"
 //#include <LEGOPowerFunctions.h>
 
 
@@ -34,13 +35,22 @@ class LEGOPowerFunctions;
 namespace dev
 {
 
-	class GLLegoPIR : public srcp::SRCPGenericLoco
+	class GLLegoPIR : public srcp::SRCPGenericLoco, public srcp::SRCPGenericSM
 	{
 	private:
 		uint8_t m_output; //red or blue
 		uint8_t m_channel; //channel 1-4
 		LEGOPowerFunctions* m_pir;
-				
+		
+		int8_t m_current_speed; //the current speed of the pir (- is reverse)
+		int8_t m_desired_speed; //the desired speed of the pir (- is reverse)
+		
+		unsigned int m_acc; //the acceleration delay in ms between speed steps
+		unsigned int m_dec; //the deceleration delay in ms between speed steps
+		bool m_only_use_acc; //only use acc value (cv3 register)
+		
+		unsigned long m_last_time; //time of the last refresh
+		
 		//send the speed to the lego ir receiver (speed has to be between -7 and 7
 		void SendSpeed(int8_t speed);
 		
@@ -52,11 +62,18 @@ namespace dev
 		//channel 1-4
 		//acc = acceleration delay in ms
 		//dec = deceleration delay in ms
-		GLLegoPIR( int addr, LEGOPowerFunctions& pir, uint8_t pir_output, uint8_t pir_channel);
+		//only_use_acc uses only the acc (cv3 register) for acceleration and deceleration
+		GLLegoPIR( int addr, LEGOPowerFunctions& pir, uint8_t pir_output, uint8_t pir_channel, unsigned int acc = 0, bool only_use_acc = true, unsigned int dec = 0);
 		
 		int set( int addr, int drivemode, int v, int v_max, int fn[] );
-		//void refresh();
-		void setPower( int on );		
+		void refresh();
+		void setPower( int on );
+		
+		//SM:
+		
+		int get( int bus, int addr, int device, int cv ) { return ( 423 ); }
+		int set( int bus, int addr, int device, int cv, int value );
+
 	};
 
 }

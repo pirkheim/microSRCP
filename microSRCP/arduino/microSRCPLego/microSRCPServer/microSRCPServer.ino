@@ -145,9 +145,23 @@ void setup()
 	DeviceManager.addFeedback( new dev::FBSwitchSensor8574( ADDR(1), 0x38 ) );
         DeviceManager.addFeedback( new dev::FBSwitchSensor8574( ADDR(9), 0x39 ) );
 
-        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(1), lego, 0, 0));//lego pir RED, channel 1 -> yellow cargo train        
-        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(2), lego, 1, 0));//lego pir BLUE, channel 1 -> red passenger train
-        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(3), lego, 0, 1));//lego pir RED, channel 2 -> red cargo train
+        dev::GLLegoPIR* lpir;
+        
+        lpir = new dev::GLLegoPIR( ADDR(1), lego, 0, 0, 800 );
+        DeviceManager.addLoco( lpir ); //lego pir RED, channel 1 -> yellow cargo train
+        DeviceManager.addSM( lpir );
+        
+        lpir = new dev::GLLegoPIR( ADDR(2), lego, 1, 0, 500); //lego pir BLUE, channel 1 -> red passenger train
+        DeviceManager.addLoco( lpir );
+        DeviceManager.addSM( lpir );
+        
+        lpir = new dev::GLLegoPIR( ADDR(3), lego, 0, 1, 900); //lego pir RED, channel 2 -> red cargo train
+        DeviceManager.addLoco( lpir );
+        DeviceManager.addSM( lpir );
+
+//        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(1), lego, 0, 0));//lego pir RED, channel 1 -> yellow cargo train        
+//        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(2), lego, 1, 0));//lego pir BLUE, channel 1 -> red passenger train
+//        DeviceManager.addLoco(new dev::GLLegoPIR( ADDR(3), lego, 0, 1));//lego pir RED, channel 2 -> red cargo train
 
         DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(1), 3, 50, 90, 1, 10) );//track switch 1
 	DeviceManager.addAccessoire( new dev::GASlowServo( ADDR(2), 4, 50, 90, 1, 10) );//track switch 2
